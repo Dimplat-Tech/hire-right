@@ -10,7 +10,7 @@ const ebooks = [
     image: "/img/blog/b11.svg",
     logo: "/img/landing/Logo.svg",
     buttonText: "Read more...",
-    buttonLink: "/ebooks/talents-remote-jobs",
+    buttonLink: "/blogs/before-you-hire",
     readTime: "5mins",
   },
   {
