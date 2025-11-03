@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme{
+  --font-manrope: var(--font-manrope);
+  --font-montserrat: var(--font-montserrat);
+  --font-space-grotesk: var(--font-space-grotesk);
+
+  --color-primary-blue: #003780;
+  --color-primary-orange: #F27933;
+  --color-primary-black: #060606;
+  --color-primary-white:#FAFAFA;
+
+
+}
+  :root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Brand Colors */
+  --color-primary-blue: #003780;
+  --color-primary-orange: #F27933;
+  
+  /* Additional Colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+  
+  /* Success Color */
+  --color-success: #10b981;
+  --color-success-hover: #059669;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* background: var(--background); */
+  color: var(--background);
+
+  font-family: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+}
+
+/* Custom utility classes for brand colors */
+.text-brand-blue {
+  color: var(--color-primary-blue);
+}
+
+.text-brand-orange {
+  color: var(--color-primary-orange);
+}
+
+.bg-brand-blue {
+  background-color: var(--color-primary-blue);
+}
+
+.bg-brand-blue:hover {
+  background-color: var(--color-primary-blue-hover);
+}
+
+.bg-brand-orange {
+  background-color: var(--color-primary-orange);
+}
+
+.bg-brand-orange:hover {
+  background-color: var(--color-primary-orange-hover);
+}
+
+.border-brand-blue {
+  border-color: var(--color-primary-blue);
+}
+
+h1,
+span {
+  font-family: 'Space Grotesk', var(--font-montserrat), system-ui, -apple-system, sans-serif;
+}
