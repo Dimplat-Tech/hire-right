@@ -54,7 +54,7 @@ const ebooks = [
     image: "/img/blog/b12.svg",
     logo: "/img/landing/Logo.svg",
     buttonText: "Read more...",
-    buttonLink: "/ebooks/hiring-managers-future-ready",
+    buttonLink: "/blogs/lazy-youths",
     readTime: "5mins",
   },
   {
@@ -78,6 +78,7 @@ type BlogCardProps = {
   description: string;
   image: string;
   buttonText: string;
+  buttonLink?: string;
   readTime: string;
   logo: string;
 };
@@ -89,6 +90,7 @@ export  function EbookCard({
   image,
   // date removed
   buttonText,
+  buttonLink = '/blogs',
   readTime,
   logo,
 }: BlogCardProps) {
@@ -128,11 +130,11 @@ export  function EbookCard({
 
         <div className="flex items-center justify-between mt-2">
           <Link
-            href="/ebooks"
-            className="text-primary-orange font-space-grotesk text-sm hover:underline font-medium"
-          >
-            {buttonText}
-          </Link>
+              href={buttonLink}
+              className="text-primary-orange font-space-grotesk text-sm hover:underline font-medium"
+            >
+              {buttonText}
+            </Link>
           {/* date removed from blog listing per request */}
         </div>
       </div>

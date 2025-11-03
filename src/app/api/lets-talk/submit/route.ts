@@ -25,9 +25,16 @@ export async function POST(req: Request) {
     const id = Date.now().toString();
     const record = { id, submittedAt: new Date().toISOString(), ...body };
     subs.unshift(record);
-    await writeSubs(subs);
+    try {
+      await writeSubs(subs);
+    } catch (err: unknown) {
+      // Log and return the write error so we can debug deployed environments
+      console.error('lets-talk: failed to write submissions file', err);
+      return NextResponse.json({ error: 'Failed to persist submission', detail: String(err) }, { status: 500 });
+    }
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
+  } catch (err: unknown) {
+    console.error('lets-talk: POST error', err);
+    return NextResponse.json({ error: 'Invalid payload or server error', detail: String(err) }, { status: 400 });
   }
 }
