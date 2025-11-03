@@ -10,13 +10,11 @@ export default function BeforeYouHirePage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-16">
       <article className="prose prose-lg mx-auto">
-        <h1>BEFORE YOU HIRE: THE ONE QUESTION THAT CHANGES EVERYTHING.</h1>
+        <h1>BEFORE YOU HIRE: THE ONE QUESTION THAT CHANGES EVERYTHING</h1>
 
         <p>
-          When businesses reach out to us to fill a role, one of the first things we ask is:
+          When businesses reach out to us to fill a role, one of the first things we ask is, <strong>Why are you hiring for this role?</strong>
         </p>
-
-        <p className="font-semibold">“Why are you hiring for this role?”</p>
 
         <p>
           It might sound like a simple question but you would be surprised how many hiring managers or business owners pause before answering.
@@ -37,9 +35,9 @@ export default function BeforeYouHirePage() {
 
         <blockquote>
           <p>
-            A company once reached out to us saying they needed a new operations manager because the last one “wasn’t working.” But when we asked why,
-            they revealed it wasn’t just about the manager, their business had doubled in size, and the job had outgrown the original structure. The real need?
-            A systems thinker who could scale operations, not just manage them.
+            A company once reached out to us saying they needed a new operations manager because the last one “wasn’t working.” But when we asked why, they
+            revealed it wasn’t just about the manager, their business had doubled in size, and the job had outgrown the original structure. The real need? A
+            systems thinker who could scale operations, not just manage them.
           </p>
         </blockquote>
 
@@ -61,7 +59,7 @@ export default function BeforeYouHirePage() {
 
         <p>
           This is why our process at HireRight is different. We don’t jump straight into sharing CVs. We dig in, we listen, we uncover the gaps, the unspoken needs,
-          and the unaddressed issues that are often at the core of why hiring feels hard, and then we tailor the solution — not just for today, but for where your
+          and the unaddressed issues that are often at the core of why hiring feels hard, and then we tailor the solution not just for today, but for where your
           business is going.
         </p>
 
@@ -69,11 +67,11 @@ export default function BeforeYouHirePage() {
           Because to us, recruitment is not a checkbox exercise. It is strategic partnership, business growth, and it’s our reputation too.
         </p>
 
-        <h2>So before you open that next job role, pause and ask:</h2>
+        <h2>So, before you open that next job role, pause and ask:</h2>
         <p className="font-semibold">“Why are we hiring for this?”</p>
 
         <p>
-          And if the answer isn’t clear, talk to us — we’ll help you figure it out. Together, your success is our success and when you hire with purpose, you build
+          And if the answer isn’t clear, talk to us, we’ll help you figure it out together; your success is our success and when you hire with purpose, you build
           teams that move your business forward.
         </p>
 
