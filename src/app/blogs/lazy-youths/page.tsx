@@ -13,26 +13,26 @@ export default function LazyYouthsPage() {
         <h1>LAZY YOUTHS? A DEEPER LOOK TO A LOUD STATEMENT</h1>
 
         <p>
-          Let’s go back a few years when a statement was made that sent shockwaves across Nigeria:
-          “Nigerian youths are lazy”
+          Let&#39;s go back a few years when a statement was made that sent shockwaves across Nigeria:
+          &ldquo;Nigerian youths are lazy&rdquo;
         </p>
 
         <p>
           Business owners were angry, youths were angrier and here we are, still circling around that
-          question. So, were they right? Well, let’s pause for a moment and ask what do you as a business
+          question. So, were they right? Well, let&#39;s pause for a moment and ask what do you as a business
           owner see when you recruit?
         </p>
 
         <p>
-          We’ll be honest. At HireRight, we have worked with over 150 companies, placed 500+ professionals,
-          and interviewed thousands of candidates across industries, and here's what we have found:
+          We&#39;ll be honest. At HireRight, we have worked with over 150 companies, placed 500+ professionals,
+          and interviewed thousands of candidates across industries, and here&#39;s what we have found:
         </p>
 
         <h2>Nigerian youths are not lazy — many are unprepared</h2>
 
         <p>
           Some lack the right attitude, many lack direction, a good number have never had solid mentorship and
-          too many simply don’t understand the realities of the workplace but this isn’t laziness, it’s a
+          too many simply don&#39;t understand the realities of the workplace but this isn&#39;t laziness, it&#39;s a
           system failure.
         </p>
 
@@ -42,21 +42,21 @@ export default function LazyYouthsPage() {
         </p>
 
         <p>
-          We see managers who are frustrated with poor work ethic. We see HR heads battling with hires who don’t
-          “get it.” We see businesses hiring for potential, then babysitting poor performance. So what can we do
-          about it? That’s the real question.
+          We see managers who are frustrated with poor work ethic. We see HR heads battling with hires who don&#39;t
+          &ldquo;get it.&rdquo; We see businesses hiring for potential, then babysitting poor performance. So what can we do
+          about it? That&#39;s the real question.
         </p>
 
         <h2>What we do at HireRight</h2>
 
         <p>
-          At HireRight, we believe in building bridges, not burning them. That’s why our work goes beyond filling
+          At HireRight, we believe in building bridges, not burning them. That&#39;s why our work goes beyond filling
           roles. We coach candidates, we educate employers, and we focus on long-term fit not just short-term fixes.
         </p>
 
         <p>
-          We also push for employer responsibility. Because let’s be honest: some companies want magic from underpaid,
-          unsupported staff and that’s not sustainable either.
+          We also push for employer responsibility. Because let&#39;s be honest: some companies want magic from underpaid,
+          unsupported staff and that&#39;s not sustainable either.
         </p>
 
         <h3>So instead of the label “lazy,” focus on:</h3>
@@ -72,7 +72,7 @@ export default function LazyYouthsPage() {
         </p>
 
         <p>
-          If you're serious about building a workforce that works, we are here to help.
+          If you&#39;re serious about building a workforce that works, we are here to help.
         </p>
 
         <div className="mt-8">
