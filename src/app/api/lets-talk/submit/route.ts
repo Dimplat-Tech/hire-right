@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 
+
+
 const DATA_PATH = path.join(process.cwd(), 'src', 'data', 'letsTalkSubmissions.json');
 
 async function readSubs() {
@@ -38,3 +40,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid payload or server error', detail: String(err) }, { status: 400 });
   }
 }
+
+console.log("🔑 RESEND KEY:", process.env.RESEND_API_KEY);

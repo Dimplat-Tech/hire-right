@@ -12,7 +12,7 @@ function page() {
         gradientOn='second'
         subtitle="Top 3 Red Flags In Hiring That You Should Never Ignore."
         buttonText="Return to home"
-        buttonLink="/"
+        buttonLink="/blogs/lazy-youths"
       />
       <Section2 />
     </div>

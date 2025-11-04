@@ -48,3 +48,7 @@ dist
 .vscode
 .DS_Store
 "@ > .gitignore
+
+
+.env.local
+
