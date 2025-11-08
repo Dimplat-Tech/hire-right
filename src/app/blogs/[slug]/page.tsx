@@ -1,7 +1,10 @@
 import { blogPosts } from "@/data/blog";
 
-export default function BlogPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+// Next.js may provide `params` as a Promise in some versions/build modes.
+// Make the page async and await `params` to support both Promise and plain object.
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = (await params) as { slug: string };
+  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 
   if (!post) {
     return <div className="p-10 text-center">Post not found</div>;

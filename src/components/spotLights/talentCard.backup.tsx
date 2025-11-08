@@ -1,15 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Button from "../common/Button";
-import { init, send } from '@emailjs/browser';
-
-const EMAILJS = {
-  SERVICE_ID: 'service_fsh6ew9',
-  TEMPLATE_ID: 'template_5wwri8n',
-  PUBLIC_KEY: '2k0B6L0Ikj4ZVJ7ue'
-};
 
 
 
@@ -22,48 +15,7 @@ type ProfileProps = {
   ImgUrl: string;
 };
   function ProfileCard({ name, gender, location, role, experience, ImgUrl }: ProfileProps) {
-  const [showDialog, setShowDialog] = useState(false);
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  useEffect(() => {
-    init(EMAILJS.PUBLIC_KEY);
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    try {
-      const templateParams = {
-        from_email: email,
-        to_name: 'HireRight Team',
-        talent_name: name,
-        talent_role: role,
-        talent_location: location,
-        talent_gender: gender,
-        talent_experience: experience,
-        message: `Interested in hiring ${name} (${role}) from ${location} with ${experience} of experience.`
-      };
-
-      await send(
-        EMAILJS.SERVICE_ID,
-        EMAILJS.TEMPLATE_ID,
-        templateParams,
-        EMAILJS.PUBLIC_KEY
-      );
-
-      setStatus('success');
-      setEmail('');
-      setTimeout(() => {
-        setShowDialog(false);
-        setStatus('idle');
-      }, 2000);
-    } catch (error) {
-      console.error('Failed to send email:', error);
-      setStatus('error');
-    }
-  };
+  // trimmed EmailJS-related states/handler from this backup file to avoid unused-variable warnings
 
     return(
         <div className=" h-[600px] max-w-[1280px] mx-auto font-manrope">
