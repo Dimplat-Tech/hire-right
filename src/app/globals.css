@@ -1,17 +1,4 @@
 @import "tailwindcss";
-
-@theme{
-  --font-manrope: var(--font-manrope);
-  --font-montserrat: var(--font-montserrat);
-  --font-space-grotesk: var(--font-space-grotesk);
-
-  --color-primary-blue: #003780;
-  --color-primary-orange: #F27933;
-  --color-primary-black: #060606;
-  --color-primary-white:#FAFAFA;
-
-
-}
   :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -78,4 +65,74 @@ body {
 h1,
 span {
   font-family: 'Space Grotesk', var(--font-montserrat), system-ui, -apple-system, sans-serif;
+}
+ 
+/* Custom animations used across components */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-slow {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.04); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 420ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2400ms ease-in-out infinite;
+}
+
+.card-elevate {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+/* Slow 3D tilt to add life (very subtle) */
+@keyframes slow-tilt {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  50% { transform: rotateX(1.2deg) rotateY(-1.2deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg); }
+}
+.animate-slow-tilt {
+  animation: slow-tilt 8000ms ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Underline reveal utility for headings */
+.underline-reveal {
+  position: relative;
+  display: inline-block;
+}
+.underline-reveal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0B57D0, #4F8DFF);
+  transition: width 360ms cubic-bezier(.2,.9,.2,1);
+}
+.group:hover .underline-reveal::after {
+  width: 100%;
+}
+
+
+/* Subtle texture pattern (diagonal noise) - small SVG data URI */
+.texture-diagonal {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><defs><pattern id='p' patternUnits='userSpaceOnUse' width='8' height='8'><path d='M0 8 L8 0' stroke='%23f3f4f6' stroke-width='0.6' stroke-opacity='0.6'/></pattern></defs><rect width='100%' height='100%' fill='url(%23p)'/></svg>");
+  background-size: auto;
+}
+
+/* Glassmorphism utility for panels */
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(245,249,255,0.6));
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  border: 1px solid rgba(255,255,255,0.5);
 }

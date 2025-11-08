@@ -1,12 +1,22 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image'; 
 import Button from '../common/Button';
+import { init, send } from '@emailjs/browser';
 
+const EMAILJS = {
+  SERVICE_ID: 'service_fsh6ew9',
+  TEMPLATE_ID: 'template_5wwri8n',
+  PUBLIC_KEY: '2k0B6L0Ikj4ZVJ7ue'
+};
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  useEffect(() => {
+    init(EMAILJS.PUBLIC_KEY);
+  }, []);
 
   return (
     <section className="w-full bg-white font-montserrat py-12 md:py-20">
@@ -22,16 +32,26 @@ const Newsletter = () => {
               e.preventDefault();
               if (!email) return setMessage({ type: 'error', text: 'Please enter a valid email.' });
               try {
-                const res = await fetch('/api/subscribe', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email }),
-                });
-                if (!res.ok) throw new Error('Subscribe failed');
-                setMessage({ type: 'success', text: 'Thank you for subscribing' });
+                // Send email via EmailJS
+                const templateParams = {
+                  subscriber_email: email,
+                  email: email,
+                  to_email: 'info@hirerightng.com',
+                  message: `New newsletter subscription from ${email}`
+                };
+
+                await send(
+                  EMAILJS.SERVICE_ID,
+                  EMAILJS.TEMPLATE_ID,
+                  templateParams,
+                  EMAILJS.PUBLIC_KEY
+                );
+
+                setMessage({ type: 'success', text: 'Thank you for subscribing! You will receive a confirmation email shortly.' });
                 setEmail('');
-              } catch {
-                setMessage({ type: 'error', text: 'Subscription failed. Please try again.' });
+              } catch (error) {
+                console.error('Newsletter subscription error:', error);
+                setMessage({ type: 'error', text: 'Subscription failed. Please try again or contact us directly.' });
               }
             }}
           >

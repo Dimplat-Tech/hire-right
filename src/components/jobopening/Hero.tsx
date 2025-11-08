@@ -5,7 +5,8 @@ function page() {
   return (
     <div>
       <HeroSection
-        backgroundImage="/jobopening/hero.jpg"
+        backgroundImage="/img/landing/hr1.jpg"
+        backgroundPosition="center"
         titleFirst="Job"
         titleSecond="Openings"
         gradientOn='first'

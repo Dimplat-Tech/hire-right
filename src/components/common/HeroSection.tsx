@@ -14,6 +14,7 @@ interface HeroSectionProps {
   buttonVariant?: "primary" | "outline" | "secondary";
   buttonProps?: React.ComponentProps<typeof Button>;
   ellipseOverlay?: string;
+  backgroundPosition?: string;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
@@ -28,13 +29,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   buttonVariant = "secondary",
   buttonProps = {},
   ellipseOverlay = "/ellipse-overlay.svg", 
+  backgroundPosition = 'center',
 }) => (
   <section
     className="relative my-[100px] w-full max-w-[1280px] mx-auto mt-4 rounded-[20px] overflow-hidden min-h-[320px] h-[320px] sm:min-h-[400px] sm:h-[400px] md:min-h-[561px] md:h-[561px]"
     style={{
       backgroundImage: `url(${backgroundImage})`,
       backgroundSize: "cover",
-      backgroundPosition: "center",
+      backgroundPosition: backgroundPosition,
       minHeight: undefined,
       height: undefined,
     }}

@@ -1,5 +1,3 @@
-// import PeopleManagement from "@/components/services/PeopleManagement";
-
 export type Job = {
   id: string;
   company: string;
@@ -290,7 +288,7 @@ export const jobs: Job[] = [
       {
     id: "j-11",
     company: "Google",
-    role: "Qality Control Officer ",
+  role: "Quality Control Officer",
     about:
       "Ensuring product excellence and compliance with standards.",
       requirements: [

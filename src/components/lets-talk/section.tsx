@@ -1,31 +1,80 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from "../common/Button";
+import { init, send } from '@emailjs/browser';
+
+const EMAILJS = {
+  SERVICE_ID: 'service_fsh6ew9',
+  TEMPLATE_ID: 'template_7hb14np',
+  PUBLIC_KEY: '2k0B6L0Ikj4ZVJ7ue'
+};
 
 const LetsTalk = () => {
   const [org, setOrg] = useState('');
   const [role, setRole] = useState('');
   const [mobile, setMobile] = useState('');
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    // Initialize EmailJS with your public key
+    init(EMAILJS.PUBLIC_KEY);
+  }, []);
   const [status, setStatus] = useState<'idle'|'loading'|'success'|'error'>('idle');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
+    
     try {
+      console.log('Preparing to send email...', {
+        serviceId: EMAILJS.SERVICE_ID,
+        templateId: EMAILJS.TEMPLATE_ID,
+        hasPublicKey: !!EMAILJS.PUBLIC_KEY
+      });
+
+      const templateParams = {
+        from_name: org,
+        organization_name: org,
+        job_role: role,
+        mobile_number: mobile,
+        email_address: email,
+        email: email,
+        to_name: 'HireRight Team',
+        message: `Organization: ${org}\nJob Role: ${role}\nMobile: ${mobile}\nEmail: ${email}`
+      };
+
+      // Send email via EmailJS
+      const emailResult = await send(
+        EMAILJS.SERVICE_ID,
+        EMAILJS.TEMPLATE_ID,
+        templateParams,
+        EMAILJS.PUBLIC_KEY
+      );
+      
+      console.log('Email sent successfully:', emailResult);
+
+            // Also send to backend for storage
       const res = await fetch('/api/lets-talk/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ organization: org, role, mobile, email }),
       });
+
       if (res.ok) {
         setStatus('success');
-        setOrg(''); setRole(''); setMobile(''); setEmail('');
+        // Clear form after successful submission
+        setOrg(''); 
+        setRole(''); 
+        setMobile(''); 
+        setEmail('');
       } else {
-        setStatus('error');
+        throw new Error('Failed to save to backend');
       }
-    } catch {
+    } catch (error) {
+      console.error('Submission error:', error);
       setStatus('error');
+      // Show error message to user
+      alert('Sorry, there was an error submitting the form. Please try again or contact us directly at info@hirerightng.com');
     }
   }
 
@@ -99,7 +148,14 @@ const LetsTalk = () => {
       </form>
 
       {status === 'success' && (
-        <div className="max-w-3xl mx-auto mt-6 p-4 bg-green-50 text-green-800 rounded">Thank you — we will reach out shortly.</div>
+        <div className="max-w-3xl mx-auto mt-6 p-8 bg-gradient-to-r from-[#003780]/10 to-[#F27933]/10 rounded-xl text-center">
+          <h3 className="text-3xl font-bold bg-gradient-to-r from-[#003780] to-[#F27933] bg-clip-text text-transparent mb-3">
+            Thank you for submitting!
+          </h3>
+          <p className="text-xl text-gray-700">
+            We appreciate your interest. Our team will reach out to you soon.
+          </p>
+        </div>
       )}
 
       <div className="flex justify-center mt-10 md:mt-16 lg:mt-14">

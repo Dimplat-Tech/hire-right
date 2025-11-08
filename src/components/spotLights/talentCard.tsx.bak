@@ -1,0 +1,242 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Button from "../common/Button";
+import { init, send } from '@emailjs/browser';
+
+const EMAILJS = {
+  SERVICE_ID: 'service_fsh6ew9',
+  TEMPLATE_ID: 'template_5wwri8n',
+  PUBLIC_KEY: '2k0B6L0Ikj4ZVJ7ue'
+};
+
+type ProfileProps = {
+  name: string;
+  gender: string;
+  location: string;
+  role: string;
+  experience: string;
+  ImgUrl: string;
+};
+function ProfileCard({
+  name,
+  gender,
+  location,
+  role,
+  experience,
+  ImgUrl
+}: ProfileProps) {
+  const [showDialog, setShowDialog] = useState(false);
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    init(EMAILJS.PUBLIC_KEY);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const templateParams = {
+        subscriber_email: email,
+        email: email,
+        to_email: 'info@hirerightng.com',
+        talent_name: name,
+        talent_role: role,
+        talent_location: location,
+        message: `Newsletter subscription and talent interest: ${name} (${role})`
+      };
+
+      await send(
+        EMAILJS.SERVICE_ID,
+        EMAILJS.TEMPLATE_ID,
+        templateParams,
+        EMAILJS.PUBLIC_KEY
+      );
+
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => {
+        setShowDialog(false);
+        setStatus('idle');
+      }, 2000);
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
+  };
+
+  return(
+        <div className=" h-[600px] max-w-[1280px] mx-auto font-manrope">
+           <div className=" flex items-center justify-around  flex-col md:flex-row ">
+
+               <div className="relative hidden md:block">
+                   <div className="relative h-full max-w-[329px] max-h-[393px] rounded-2xl overflow-hidden shadow-lg flex-shrink-0 bg-white">
+                     <Image
+                       src={ImgUrl}
+                       alt={"talent"}
+                       width={329.33} height={393.94}
+                       className="rounded-2xl object-cover"
+                       priority={false}
+                    />
+                                   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[rgba(204,215,230,0.7)] rounded-[20px] px-4 py-2 text-center w-[218px] h-[83px]">
+                                         <span className="block font-semibold text-gray-900 text-base">{name}</span>
+                                          <span className="block text-gray-600 text-sm">{role}</span>
+                                   </div>
+                              
+
+                                 </div>
+                              
+
+                {/* <div className="">
+                   <Image src={ImgUrl} alt="hr1" width={329.33} height={393.94} className="rounded-[20px]"/>
+                   </div>
+                     <div className="absolute bottom-10 left-10 border 1  bg-[#CCD7E6] rounded-[20px] w-[218.06px] h-[83.45px] text-center font-manrope text-[17px] text-[#060606] font-[500] leading-relaxed pt-2 text-center">
+                        <h1 className="">{name}</h1>
+                        <p className="">{role}</p>
+                     </div> */}
+               </div>
+               
+
+               
+<div
+  className="relative w-full overflow-hidden max-w-[684px] min-h-[330px]  p-6 flex flex-col gap-[20px] md:gap-[20px] rounded-[20px] border border-primary-orange bg-[rgba(6,6,6,0.03)] font-medium text-[18px] pl-5 pt-5 leading-normal"
+  style={{ boxShadow: '0px 4.99px 24.97px rgba(0, 55, 128, 0.15)' }}
+>
+  {/* Responsive Image and Name for Mobile */}
+  <div className="flex md:hidden items-center gap-4">
+    <Image
+      src={ImgUrl}
+      width={100}
+      height={200}
+      alt="ge"
+      className="rounded-full"
+    />
+    <h1 className="text-xl font-semibold">{name}</h1>
+  </div>
+
+  {/* Content - improved visibility */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+    <div className="flex flex-col">
+      <span className="text-sm text-[#1746A2] font-medium uppercase tracking-wide">Gender</span>
+      <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{gender}</span>
+    </div>
+
+    <div className="flex flex-col">
+      <span className="text-sm text-[#1746A2] font-medium uppercase tracking-wide">Location</span>
+      <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{location}</span>
+    </div>
+
+    <div className="flex flex-col">
+      <span className="text-sm text-[#1746A2] font-medium uppercase tracking-wide">Suitable role</span>
+      <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{role}</span>
+    </div>
+
+    <div className="flex flex-col">
+      <span className="text-sm text-[#1746A2] font-medium uppercase tracking-wide">Years of experience</span>
+      <span className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100">{experience}</span>
+    </div>
+  </div>
+
+<div className="flex justify-center">
+            <Button 
+              variant="secondary" 
+              className="w-full justify-center" 
+              arrow
+              onClick={() => setShowDialog(true)}
+            >
+              Subscribe & Connect
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Newsletter Dialog */}
+    {showDialog && (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-xl p-6 w-full max-w-md mx-4 relative">
+          <button 
+            onClick={() => setShowDialog(false)}
+            className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">Connect with {name}</h3>
+          <p className="text-gray-600 mb-6">
+            Subscribe to our newsletter to receive updates about {name} and other talented professionals.
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Your Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter your email"
+                disabled={status === 'loading'}
+              />
+            </div>
+
+            <Button
+              variant="secondary"
+              type="submit"
+              className="w-full justify-center"
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? 'Subscribing...' : 
+               status === 'success' ? 'Subscribed!' : 
+               status === 'error' ? 'Try Again' : 
+               'Subscribe Now'}
+            </Button>
+
+            {status === 'success' && (
+              <p className="text-green-600 text-sm text-center">
+                Thank you for subscribing! You'll receive updates about {name} and other opportunities.
+              </p>
+            )}
+
+            {status === 'error' && (
+              <div className="mt-4 bg-red-50 border border-red-200 rounded-lg p-4">
+                <div className="flex items-start">
+                  <div className="flex-1">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Unable to complete subscription
+                    </h3>
+                    <div className="mt-2 text-sm text-red-700">
+                      <p>Please try again or contact us at{' '}
+                        <a 
+                          href="mailto:dimplattech@gmail.com"
+                          className="font-medium text-blue-600 hover:text-blue-500 underline"
+                        >
+                          dimplattech@gmail.com
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+    )}
+  </>
+)
+
+}
+
+
+export default ProfileCard;
