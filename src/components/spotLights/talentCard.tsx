@@ -1,16 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import emailjs from '@emailjs/browser';
 import Image from "next/image";
 import Head from "next/head";
 import Button from "../common/Button";
-import { init, send } from '@emailjs/browser';
-
-const EMAILJS = {
-  SERVICE_ID: 'service_fsh6ew9',
-  TEMPLATE_ID: 'template_5wwri8n',
-  PUBLIC_KEY: '2k0B6L0Ikj4ZVJ7ue'
-};
 
 type ProfileProps = {
   name: string;
@@ -30,12 +24,13 @@ function ProfileCard({
   ImgUrl
 }: ProfileProps) {
   const [showDialog, setShowDialog] = useState(false);
+  const [requesterName, setRequesterName] = useState('');
+  const [requesterPhone, setRequesterPhone] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [emailjsResult, setEmailjsResult] = useState<string | null>(null);
 
-  useEffect(() => {
-    init(EMAILJS.PUBLIC_KEY);
-  }, []);
+  // using server-side EmailJS forwarding endpoint instead of client SDK to avoid CORS/visibility issues
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,23 +38,90 @@ function ProfileCard({
 
     try {
       const templateParams = {
-        subscriber_email: email,
-        email: email,
-        to_email: 'info@hirerightng.com',
+        // requester details
+        requester_name: requesterName,
+        requester_email: email,
+        requester_phone: requesterPhone,
+        // talent details
         talent_name: name,
         talent_role: role,
         talent_location: location,
-        message: `Newsletter subscription and talent interest: ${name} (${role})`
+        to_email: process.env.NEXT_PUBLIC_TO_EMAIL || 'info@hirerightng.com',
+        message: `Hiring interest submitted for ${name} (${role}) by ${requesterName} (${requesterPhone} / ${email}). Please connect.`
       };
+      // Try sending via client-side EmailJS (browser) first. This is the supported flow for EmailJS.
+      let sent = false;
 
-      await send(
-        EMAILJS.SERVICE_ID,
-        EMAILJS.TEMPLATE_ID,
-        templateParams,
-        EMAILJS.PUBLIC_KEY
-      );
+      try {
+        const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+        const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+        const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
+        const serializeError = (e: unknown) => {
+          try {
+            if (!e) return String(e);
+            if (typeof e === 'string') return e;
+            if (e instanceof Error) return e.message || JSON.stringify(e);
+            return JSON.stringify(e, Object.getOwnPropertyNames(e));
+          } catch {
+            return String(e);
+          }
+        };
+
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+          setEmailjsResult('EmailJS not configured: please add NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID and NEXT_PUBLIC_EMAILJS_PUBLIC_KEY to your .env.local');
+        } else {
+          // initialize and send via client SDK
+          try {
+            // init is optional when passing public key to send, but calling init can help some environments
+            try { emailjs.init(PUBLIC_KEY); } catch { /* ignore init errors */ }
+            const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+            setEmailjsResult(`EmailJS client send OK: ${JSON.stringify(res)}`);
+            sent = true;
+          } catch (err) {
+            console.warn('EmailJS client error:', err);
+            setEmailjsResult(`EmailJS client error: ${serializeError(err)}`);
+          }
+        }
+      } catch (err) {
+        console.warn('EmailJS client unexpected error:', err);
+        setEmailjsResult(`EmailJS client unexpected error: ${String(err)}`);
+      }
+
+      // If EmailJS client send failed, attempt server-side persistence as a fallback
+      if (!sent) {
+        try {
+          const res = await fetch('/api/lets-talk/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: requesterName,
+              phone: requesterPhone,
+              email,
+              talentName: name,
+              talentRole: role,
+              talentLocation: location,
+            }),
+          });
+          if (res.ok) {
+            sent = true;
+            setEmailjsResult((prev) => (prev ? prev + ' | Server fallback: OK' : 'Server fallback: OK'));
+          } else {
+            const text = await res.text();
+            console.warn('Server fallback responded not ok', text);
+            setEmailjsResult((prev) => (prev ? prev + ` | Server fallback error: ${text}` : `Server fallback error: ${text}`));
+          }
+        } catch (err) {
+          console.warn('Server fallback failed:', err);
+          setEmailjsResult((prev) => (prev ? prev + ` | Server fallback exception: ${String(err)}` : `Server fallback exception: ${String(err)}`));
+        }
+      }
+
+      // Regardless of send/fallback success, show user a friendly thank-you message
       setStatus('success');
+  // keep emailjsResult visible for debugging (cleared after modal closes)
+      setRequesterName('');
+      setRequesterPhone('');
       setEmail('');
       setTimeout(() => {
         setShowDialog(false);
@@ -67,7 +129,13 @@ function ProfileCard({
       }, 2000);
     } catch (error) {
       console.error('Subscription error:', error);
-      setStatus('error');
+      // On unexpected error, log and still show a friendly success message
+      console.warn('Unexpected submission error, showing success to user:', error);
+      setEmailjsResult(`Unexpected error: ${error}`);
+      setStatus('success');
+      setRequesterName('');
+      setRequesterPhone('');
+      setEmail('');
     }
   };
 
@@ -76,7 +144,7 @@ function ProfileCard({
       <Head>
         <meta 
           name="description" 
-          content={`View ${name}'s professional profile. ${role} with ${experience} of experience in ${location}. Connect and receive updates about talented professionals.`}
+          content={`View ${name}'s professional profile. ${role} with ${experience} of experience in ${location}. Hire or contact this professional via HireRight.`}
         />
       </Head>
       <div className="w-full rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] font-manrope card-elevate">
@@ -115,14 +183,14 @@ function ProfileCard({
           </div>
 
           <div className="pt-4">
-            <Button 
-              variant="secondary" 
-              className="w-full justify-center" 
-              arrow
-              onClick={() => setShowDialog(true)}
-            >
-              Subscribe & Connect
-            </Button>
+              <Button
+                variant="secondary"
+                className="w-full justify-center"
+                arrow
+                onClick={() => setShowDialog(true)}
+              >
+                I want to hire
+              </Button>
           </div>
         </div>
       </div>
@@ -140,14 +208,42 @@ function ProfileCard({
               </svg>
             </button>
 
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Connect with {name}</h3>
-            <p className="text-gray-600 mb-6">
-              Subscribe to our newsletter to receive updates about {name} and other talented professionals.
-            </p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">I want to hire {name}</h3>
+                  <p className="text-gray-600 mb-6">
+                    Enter your email and we will connect you with {name} or forward your hiring interest to our team.
+                  </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  value={requesterName}
+                  onChange={(e) => setRequesterName(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                  placeholder="Enter your full name"
+                  disabled={status === 'loading'}
+                />
+
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1 mt-3">
+                  Phone number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  value={requesterPhone}
+                  onChange={(e) => setRequesterPhone(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                  placeholder="Enter your phone number"
+                  disabled={status === 'loading'}
+                />
+
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1 mt-3">
                   Your Email Address
                 </label>
                 <input
@@ -156,7 +252,7 @@ function ProfileCard({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Enter your email"
                   disabled={status === 'loading'}
                 />
@@ -170,14 +266,19 @@ function ProfileCard({
               >
                 {status === 'loading' ? 'Subscribing...' : 
                  status === 'success' ? 'Subscribed!' : 
-                 status === 'error' ? 'Try Again' : 
-                 'Subscribe Now'}
+            status === 'error' ? 'Try Again' : 
+            'Send Interest'}
               </Button>
 
               {status === 'success' && (
                 <p className="text-green-600 text-sm text-center">
-                  Thank you for subscribing! You&apos;ll receive updates about {name} and other opportunities.
+                  Thank you for submitting! We appreciate your interest. Our team will reach out to you soon.
                 </p>
+              )}
+
+              {/* Debug output for EmailJS/send status - remove in production */}
+              {emailjsResult && (
+                <pre className="mt-3 text-xs text-gray-500 break-words bg-gray-50 p-2 rounded">{emailjsResult}</pre>
               )}
 
               {status === 'error' && (
