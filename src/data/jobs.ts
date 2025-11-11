@@ -22,7 +22,7 @@ export type Job = {
 export const jobs: Job[] = [
   {
     id: "j-1",
-    company: "Google",
+  company: "Hire Right",
     role: "Social media manager",
     requirements: [
     "Experience managing social media in crypto/fintech/tech",
@@ -40,7 +40,7 @@ export const jobs: Job[] = [
     salary: "#400,000-#500,000",
     duties: ["Content creation", "Community engagement", "Analytics tracking", "Campaign management", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -49,7 +49,7 @@ export const jobs: Job[] = [
   },
   {
     id: "j-2",
-    company: "Google",
+  company: "Hire Right",
     role: "Hr Manager",
     requirements: [
       "Bachelor's in HR, Business Admin or related field (HR certification a plus)",
@@ -67,7 +67,7 @@ export const jobs: Job[] = [
     salary: "#3,000,000-#3,600,000",
     duties:["Recruitment & onboarding", "Employee relations", "Performance management", "Policy development", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -76,7 +76,7 @@ export const jobs: Job[] = [
   },
   {
     id: "j-3",
-    company: "Google",
+  company: "Hire Right",
     role: "Restaurant Manager",
     requirements: [
    "HND/BSc in Hospitality ,Business Admin , or related field ",
@@ -95,7 +95,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties:["Daily operations supervision", "Customer service", "Staff scheduling", "Inventory management", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/location.png",
@@ -104,7 +104,7 @@ export const jobs: Job[] = [
   },
    {
     id: "j-4",
-    company: "Google",
+  company: "Hire Right",
     role: "Sales Representative-Fashion",
     requirements: [
       "HND/BSc in any field (fashion retail experience a plus )",
@@ -120,7 +120,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Client engagement", "Sales conversion", "Fashion advisory", "Relationship building", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -129,7 +129,7 @@ export const jobs: Job[] = [
   },
    {
     id: "j-5",
-    company: "Google",
+  company: "Hire Right",
     role: "Head, CASA Business Segment",
     about:
       "Leading growth in current and savings account portfolios.",
@@ -148,7 +148,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Account acquisition", "Product strategy", "Customer retention", "Campaign execution", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -157,7 +157,7 @@ export const jobs: Job[] = [
   },
     {
     id: "j-6",
-    company: "Google",
+  company: "Hire Right",
     role: "Head, Salary Business Segment",
     about:
       "Driving salary-based banking products and client satisfaction.",
@@ -174,7 +174,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Salary account management", "Corporate partnerships", "Client retention", "Business growth", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -183,7 +183,7 @@ export const jobs: Job[] = [
   },
       {
     id: "j-7",
-    company: "Google",
+  company: "Hire Right",
     role: "Business/Operations Admin",
     about:
       "Supporting efficient workflows and daily business operations.",
@@ -200,7 +200,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Clerical support", "Record management", "Meeting coordination", "Process support", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -209,7 +209,7 @@ export const jobs: Job[] = [
   },
       {
     id: "j-8",
-    company: "Google",
+  company: "Hire Right",
     role: "Junior Architect",
     about:
       "Transforming creative ideas into functional architectural designs.",
@@ -226,7 +226,7 @@ export const jobs: Job[] = [
     salary: "#2,400,000 Anually",
     duties: ["Design assistance", "Drawing preparation", "Project modeling", "Senior support", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -235,7 +235,7 @@ export const jobs: Job[] = [
   },
       {
     id: "j-9",
-    company: "Google",
+  company: "Hire Right",
     role: "Head, Corporate Business Segment ",
     about:
       "Spearheading corporate partnerships and business development.",
@@ -252,7 +252,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties:["Design assistance", "Drawing preparation", "Project modeling", "Senior support", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -261,7 +261,7 @@ export const jobs: Job[] = [
   },
       {
     id: "j-10",
-    company: "Google",
+  company: "Hire Right",
     role: "Assistant Engineer",
     about:
       "Designing and implementing innovative technical solutions.",
@@ -278,7 +278,7 @@ export const jobs: Job[] = [
     salary: "#2,400,000 - #3,000,000 Anually",
     duties: ["System design", "Implementation", "Testing & validation", "Project collaboration", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -286,8 +286,8 @@ export const jobs: Job[] = [
     image: "/img/jobs/job10.jpeg", // <-- Updated image path
   },
       {
-    id: "j-11",
-    company: "Google",
+        id: "j-11",
+        company: "Hire Right",
   role: "Quality Control Officer",
     about:
       "Ensuring product excellence and compliance with standards.",
@@ -302,7 +302,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties:["Product inspection", "Standards compliance", "Issue reporting", "Process improvement", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -310,8 +310,8 @@ export const jobs: Job[] = [
     image: "/img/jobs/job11.jpeg", // <-- Updated image path
   },
       {
-    id: "j-12",
-    company: "Google",
+        id: "j-12",
+        company: "Hire Right",
     role: "Full Stack Engineer (Fintech",
     about:
       "Building secure, scalable fintech solutions from front to back end.",
@@ -328,7 +328,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Frontend development", "Backend Integration", "API implementation", "Process support", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -336,8 +336,8 @@ export const jobs: Job[] = [
     image: "/img/jobs/job12.jpeg", // <-- Updated image path
   },
       {
-    id: "j-13",
-    company: "Google",
+        id: "j-13",
+        company: "Hire Right",
     role: "Engineering Lead",
     about:
       "Guiding teams to deliver impactful engineering solutions.",
@@ -354,7 +354,7 @@ export const jobs: Job[] = [
     salary: "#4,000,000 - #4,800,000 Anually",
     duties:["Team leadership", "Project supervision", "Mentorship", "Innovation delivery", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -362,8 +362,8 @@ export const jobs: Job[] = [
     image: "/img/jobs/job13.jpeg", // <-- Updated image path
   },
       {
-    id: "j-14",
-    company: "Google",
+        id: "j-14",
+        company: "Hire Right",
     role: "Areas Sales Manager",
     about:
       "Driving regional sales performance and market growth.",
@@ -380,7 +380,7 @@ export const jobs: Job[] = [
     salary: "#4,800,000 - #7,200,000 Anually",
     duties:["Regional sales growth", "Team training", "Target achievement", "Market analysis", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",
@@ -388,8 +388,8 @@ export const jobs: Job[] = [
     image: "/img/jobs/job14.jpeg", // <-- Updated image path
   },
       {
-    id: "j-15",
-    company: "Google",
+        id: "j-15",
+        company: "Hire Right",
     role: "Business/Operations Admin",
     about:
       "Supporting efficient workflows and daily business operations.",
@@ -406,7 +406,7 @@ export const jobs: Job[] = [
     salary: "$500 - $800",
     duties: ["Clerical support", "Record management", "Meeting coordination", "Process support", "& more"],
     posted: "27/07/2025",
-    logo: "/jobopening/google.png",
+  logo: "/img/landing/Logo.svg",
     locate:"/jobopening/locate.png",
     calendar:"/jobopening/calendar.png",
     locatebar:"/jobopening/locationr.png",

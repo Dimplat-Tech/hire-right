@@ -35,51 +35,45 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Navigation Header */}
-      <nav className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold text-indigo-600">Admin Dashboard</span>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <button className="ml-4 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">
-                Logout
-              </button>
-            </div>
-          </div>
+    <div className="flex h-screen bg-gray-50">
+      {/* Fixed Sidebar Navigation - Left Side */}
+      <div className="w-64 bg-white shadow-lg overflow-y-auto">
+        <div className="sticky top-0 bg-white border-b border-gray-200 p-4">
+          <h1 className="text-xl font-bold text-indigo-600">Admin</h1>
         </div>
-      </nav>
+        <nav className="p-4 space-y-2">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveSection(item.id)}
+              className={`w-full flex items-center gap-3 px-4 py-2 rounded-md font-medium transition-colors ${
+                activeSection === item.id
+                  ? 'bg-indigo-100 text-indigo-700'
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+            >
+              <span className="text-lg">{item.icon}</span>
+              <span className="text-sm">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-12 gap-6">
-          {/* Sidebar Navigation */}
-          <div className="col-span-12 lg:col-span-2">
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <nav className="space-y-1">
-                {navItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveSection(item.id)}
-                    className={`w-full flex items-center px-4 py-3 text-sm font-medium transition-colors ${
-                      activeSection === item.id
-                        ? 'bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                    }`}
-                  >
-                    <span className="mr-3">{item.icon}</span>
-                    {item.label}
-                  </button>
-                ))}
-              </nav>
-            </div>
-          </div>
+      {/* Main Content Area - Full Height, Scrollable */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Bar with Logout */}
+        <div className="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {navItems.find((item) => item.id === activeSection)?.label || 'Dashboard'}
+          </h2>
+          <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
+            Logout
+          </button>
+        </div>
 
-          {/* Main Content Area */}
-          <div className="col-span-12 lg:col-span-10">
+        {/* Main Content - Scrollable */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-6 max-w-7xl mx-auto w-full">
             <div className="bg-white rounded-lg shadow">
               {renderSection()}
             </div>

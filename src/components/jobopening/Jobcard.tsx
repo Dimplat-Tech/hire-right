@@ -79,8 +79,20 @@ const JobCard = ({ job, isOpen, onToggle }: Props) => {
           <div className="flex items-start gap-4 z-10 w-full">
             <div className="relative group-hover:scale-105 transition-transform duration-300">
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600 to-violet-600 rounded-full blur-md opacity-75"></div>
-              <div className="relative bg-gradient-to-tr from-indigo-500 to-violet-500 text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl font-extrabold shadow-lg animate-pulse-slow flex-shrink-0 border border-white/10">
-                {job.company ? job.company.charAt(0).toUpperCase() : job.role.charAt(0).toUpperCase()}
+              <div className="relative bg-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg flex-shrink-0 border border-white/10 overflow-hidden">
+                {job.logo ? (
+                  <Image
+                    src={job.logo}
+                    alt={`${job.company || 'Employer'} logo`}
+                    width={64}
+                    height={64}
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="text-3xl font-extrabold text-indigo-600">
+                    {job.company ? job.company.charAt(0).toUpperCase() : job.role.charAt(0).toUpperCase()}
+                  </span>
+                )}
               </div>
             </div>
               <div className="text-left flex-1 min-w-0">

@@ -16,12 +16,12 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
       {!isAuthenticated ? (
         <AdminLogin onLogin={handleLogin} />
       ) : (
         <AdminDashboard />
       )}
-    </div>
+    </>
   );
 }

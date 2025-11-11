@@ -17,8 +17,8 @@ const JobOpenings = () => {
     },
     {
       id: 2,
-      company: "Google",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",
+      company: "Hire Right",
+      logo: "/img/landing/Logo.svg",
       position: "Engineering Lead",
       location: "Lagos, Nigeria",
       salary: "₦4,200,000-₦4,800,000 annually",
@@ -26,8 +26,8 @@ const JobOpenings = () => {
     },
     {
       id: 3,
-      company: "Google",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",
+      company: "Hire Right",
+      logo: "/img/landing/Logo.svg",
       position: "HR Manager",
       location: "Lagos, Nigeria",
       salary: "₦3,000,000-₦3,600,000 annually",
