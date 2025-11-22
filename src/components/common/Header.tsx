@@ -120,7 +120,7 @@ const Header: React.FC = () => {
 							{/* Buttons */}
 							<div className="hidden lg:flex items-center gap-4">
 								<Button variant="outline" href='/lets-talk'>Hire Now</Button>
-								<Button variant="secondary" href='https://forms.zohopublic.com/elvaridah1/form/TalentSubmissionForm1/formperma/UvdO4BbDrTv3O9D2TBGgFoICMm5dUCo43fAOxY7tEUc'>Join Our Talent Pool</Button>
+								<Button variant="secondary" href={'https://forms.zohopublic.com/elvaridah1/form/TalentSubmissionForm1/formperma/UvdO4BbDrTv3O9D2TBGgFoICMm5dUCo43fAOxY7tEUc'}>Join Our Talent Pool</Button>
 							</div>
 						</nav>
 					</header>

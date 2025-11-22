@@ -31,7 +31,7 @@ const HeroSection: React.FC = () => {
 							At HireRight, we specialize in connecting businesses<br />
 							with top-tier talent tailored to their unique needs.
 						</p>
-						<Button variant="secondary" className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-2xl" href='/talent-submission'>Join Our Talent Pool</Button>
+						<Button variant="secondary" className="px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg rounded-2xl" href={'https://forms.zohopublic.com/elvaridah1/form/TalentSubmissionForm1/formperma/UvdO4BbDrTv3O9D2TBGgFoICMm5dUCo43fAOxY7tEUc'}>Join Our Talent Pool</Button>
 					</div>
 				</section>
 			);
