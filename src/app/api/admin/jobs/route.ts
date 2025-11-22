@@ -29,10 +29,10 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-  const jobs = await readJobs();
-  const id = Date.now().toString();
-  const newJob: Job = { id, ...(body as Record<string, unknown>) };
-  jobs.unshift(newJob);
+    const jobs = await readJobs();
+    const id = Date.now().toString();
+    const newJob: Job = { id, ...(body as Record<string, unknown>) };
+    jobs.unshift(newJob);
     await writeJobs(jobs);
     return NextResponse.json(newJob, { status: 201 });
   } catch {
@@ -46,8 +46,8 @@ export async function PUT(req: Request) {
     const id = url.searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
     const body = await req.json();
-  const jobs = await readJobs();
-  const idx = jobs.findIndex((j: Job) => (j.id as string) === id);
+    const jobs = await readJobs();
+    const idx = jobs.findIndex((j: Job) => (j.id as string) === id);
     if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     jobs[idx] = { ...jobs[idx], ...body };
     await writeJobs(jobs);
@@ -62,9 +62,9 @@ export async function DELETE(req: Request) {
     const url = new URL(req.url);
     const id = url.searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Missing id' }, { status: 400 });
-  let jobs = await readJobs();
+    let jobs = await readJobs();
     const before = jobs.length;
-  jobs = jobs.filter((j: Job) => (j.id as string) !== id);
+    jobs = jobs.filter((j: Job) => (j.id as string) !== id);
     if (jobs.length === before) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     await writeJobs(jobs);
     return NextResponse.json({ success: true });

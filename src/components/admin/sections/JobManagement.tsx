@@ -1,26 +1,66 @@
 "use client";
-import { useState } from 'react';
-import { Job } from '@/data/jobs';
+import { useEffect, useState } from 'react';
+import type { Job } from '@/data/jobs';
 import Button from '@/components/common/Button';
 
 export default function JobManagement() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [isAddingJob, setIsAddingJob] = useState(false);
   const [editingJob, setEditingJob] = useState<Job | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
 
-  const handleAddJob = (newJob: Job) => {
-    setJobs([...jobs, newJob]);
-    setIsAddingJob(false);
-  };
+  useEffect(() => { load(); }, []);
 
-  const handleEditJob = (job: Job) => {
-    setJobs(jobs.map(j => j.id === job.id ? job : j));
-    setEditingJob(null);
-  };
+  async function load() {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/admin/jobs');
+      const data = await res.json();
+      setJobs((data as Job[]) || []);
+    } catch (err) {
+      console.error('Failed to load jobs', err);
+      setJobs([]);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  const handleDeleteJob = (jobId: string) => {
-    setJobs(jobs.filter(j => j.id !== jobId));
-  };
+  async function handleAddJob(newJob: Job) {
+    setActionLoading('new');
+    try {
+      await fetch('/api/admin/jobs', { method: 'POST', body: JSON.stringify(newJob) });
+      setIsAddingJob(false);
+      await load();
+    } catch (err) {
+      console.error('Add job error', err);
+      alert('Failed to add job');
+    } finally { setActionLoading(null); }
+  }
+
+  async function handleEditJob(job: Job) {
+    setActionLoading(job.id);
+    try {
+      await fetch('/api/admin/jobs', { method: 'PUT', body: JSON.stringify(job) });
+      setEditingJob(null);
+      await load();
+    } catch (err) {
+      console.error('Edit job error', err);
+      alert('Failed to save job');
+    } finally { setActionLoading(null); }
+  }
+
+  async function handleDeleteJob(jobId: string) {
+    if (!confirm('Delete this job?')) return;
+    setActionLoading(jobId);
+    try {
+      await fetch(`/api/admin/jobs?id=${encodeURIComponent(jobId)}`, { method: 'DELETE' });
+      await load();
+    } catch (err) {
+      console.error('Delete job error', err);
+      alert('Failed to delete job');
+    } finally { setActionLoading(null); }
+  }
 
   return (
     <div className="p-6">
@@ -38,7 +78,9 @@ export default function JobManagement() {
       {/* Job List */}
       <div className="bg-gray-50 shadow overflow-hidden sm:rounded-md">
         <ul className="divide-y divide-gray-200">
-          {jobs.length === 0 ? (
+          {loading ? (
+            <li className="px-6 py-8 text-center text-gray-500">Loading jobs...</li>
+          ) : jobs.length === 0 ? (
             <li className="px-6 py-8 text-center text-gray-500">
               No jobs added yet. Click &quot;Add New Job&quot; to get started.
             </li>
@@ -63,6 +105,7 @@ export default function JobManagement() {
                       variant="secondary"
                       onClick={() => setEditingJob(job)}
                       className="px-3 py-1"
+                      disabled={!!actionLoading}
                     >
                       Edit
                     </Button>
@@ -70,6 +113,7 @@ export default function JobManagement() {
                       variant="secondary"
                       onClick={() => handleDeleteJob(job.id)}
                       className="px-3 py-1 text-red-600 hover:bg-red-50"
+                      disabled={actionLoading === job.id}
                     >
                       Delete
                     </Button>

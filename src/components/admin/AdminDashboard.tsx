@@ -20,6 +20,7 @@ const navItems = [
 
 export default function AdminDashboard() {
   const [activeSection, setActiveSection] = useState('jobs');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const renderSection = () => {
     switch (activeSection) {
@@ -44,8 +45,8 @@ export default function AdminDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Fixed Sidebar Navigation - Left Side */}
-      <div className="w-64 bg-white shadow-lg overflow-y-auto">
+      {/* Sidebar (hidden on small screens) */}
+      <div className={`hidden md:block w-64 bg-white shadow-lg overflow-y-auto`}>
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4">
           <h1 className="text-xl font-bold text-indigo-600">Admin</h1>
         </div>
@@ -67,13 +68,47 @@ export default function AdminDashboard() {
         </nav>
       </div>
 
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-50 md:hidden">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setSidebarOpen(false)} />
+          <div className="absolute left-0 top-0 bottom-0 w-64 bg-white shadow-lg overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+              <h1 className="text-xl font-bold text-indigo-600">Admin</h1>
+              <button onClick={() => setSidebarOpen(false)} className="text-gray-600">✕</button>
+            </div>
+            <nav className="p-4 space-y-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveSection(item.id); setSidebarOpen(false); }}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded-md font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'bg-indigo-100 text-indigo-700'
+                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  }`}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="text-sm">{item.label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
       {/* Main Content Area - Full Height, Scrollable */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar with Logout */}
-        <div className="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-gray-900">
-            {navItems.find((item) => item.id === activeSection)?.label || 'Dashboard'}
-          </h2>
+        <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <button className="md:hidden p-2 rounded-md bg-gray-100" onClick={() => setSidebarOpen(true)}>
+              ☰
+            </button>
+            <h2 className="text-lg font-semibold text-gray-900">
+              {navItems.find((item) => item.id === activeSection)?.label || 'Dashboard'}
+            </h2>
+          </div>
           <button className="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md transition-colors">
             Logout
           </button>

@@ -14,6 +14,7 @@ type News = {
 export default function NewsroomManagement() {
   const [items, setItems] = useState<News[]>([]);
   const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [editing, setEditing] = useState<News | null>(null);
   const [showForm, setShowForm] = useState(false);
 
@@ -29,18 +30,34 @@ export default function NewsroomManagement() {
   }
 
   async function handleSave(payload: Partial<News>) {
-    if (payload.id) {
-      await fetch('/api/admin/newsroom', { method: 'PUT', body: JSON.stringify(payload) });
-    } else {
-      await fetch('/api/admin/newsroom', { method: 'POST', body: JSON.stringify(payload) });
+    setActionLoading(payload.id || 'new');
+    try {
+      if (payload.id) {
+        await fetch('/api/admin/newsroom', { method: 'PUT', body: JSON.stringify(payload) });
+      } else {
+        await fetch('/api/admin/newsroom', { method: 'POST', body: JSON.stringify(payload) });
+      }
+      setShowForm(false); setEditing(null); await load();
+    } catch (err) {
+      console.error('Save newsroom error', err);
+      alert('Failed to save item. Check console for details.');
+    } finally {
+      setActionLoading(null);
     }
-    setShowForm(false); setEditing(null); await load();
   }
 
   async function handleDelete(id: string) {
     if (!confirm('Delete this newsroom item?')) return;
-    await fetch(`/api/admin/newsroom?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-    await load();
+    setActionLoading(id);
+    try {
+      await fetch(`/api/admin/newsroom?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+      await load();
+    } catch (err) {
+      console.error('Delete newsroom error', err);
+      alert('Failed to delete item. Check console for details.');
+    } finally {
+      setActionLoading(null);
+    }
   }
 
   return (
@@ -60,8 +77,8 @@ export default function NewsroomManagement() {
                   <div className="text-sm text-gray-600">{n.summary}</div>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="secondary" onClick={() => { setEditing(n); setShowForm(true); }}>Edit</Button>
-                  <Button variant="secondary" onClick={() => handleDelete(n.id)} className="text-red-600">Delete</Button>
+                  <Button variant="secondary" onClick={() => { setEditing(n); setShowForm(true); }} disabled={!!actionLoading}>Edit</Button>
+                  <Button variant="secondary" onClick={() => handleDelete(n.id)} className="text-red-600" disabled={actionLoading === n.id}>Delete</Button>
                 </div>
               </div>
             ))

@@ -10,6 +10,7 @@ const ebooks = [
     image: "/img/blog/b11.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/talents-remote-jobs",
+    downloadLink: "/ebooks/ebook-1.pdf",
     readTime: "5mins",
   },
   {
@@ -20,6 +21,7 @@ const ebooks = [
     image: "/img/blog/b14.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/hiring-managers-tech-talent",
+    downloadLink: "/ebooks/ebook-2.pdf",
     readTime: "5mins",
   },
   {
@@ -30,6 +32,7 @@ const ebooks = [
     image: "/img/blog/b12.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/hiring-managers-future-ready",
+    downloadLink: "/ebooks/ebook-3.pdf",
     readTime: "5mins",
   },
 ];
@@ -43,6 +46,7 @@ type EbookCardProps = {
   image: string;
   buttonText: string;
   buttonLink: string;
+  downloadLink?: string;
   readTime: string;
 };
 
@@ -53,6 +57,7 @@ export  function EbookCard({
   image,
   buttonText,
   buttonLink,
+  downloadLink,
   readTime,
 }: EbookCardProps) {
   return (
@@ -90,12 +95,19 @@ export  function EbookCard({
         </p>
 
         <div className="flex items-center justify-between mt-2">
-          <a
-            href={buttonLink}
-            className="text-primary-orange font-space-grotesk text-sm hover:underline font-medium"
-          >
-            {buttonText}
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              href={buttonLink}
+              className="text-primary-orange font-space-grotesk text-sm hover:underline font-medium"
+            >
+              {buttonText}
+            </a>
+            {downloadLink && (
+              <a href={downloadLink} download className="bg-primary-orange text-white px-3 py-1 rounded-md text-sm hover:opacity-90">
+                Download
+              </a>
+            )}
+          </div>
           {/* date removed from ebook listing per request */}
         </div>
       </div>
