@@ -5,9 +5,13 @@ import TalentManagement from '@/components/admin/sections/TalentManagement';
 import UserManagement from '@/components/admin/sections/UserManagement';
 import Analytics from '@/components/admin/sections/Analytics';
 import Settings from '@/components/admin/sections/Settings';
+import BlogManagement from '@/components/admin/sections/BlogManagement';
+import NewsroomManagement from '@/components/admin/sections/NewsroomManagement';
 
 const navItems = [
   { id: 'jobs', label: 'Job Management', icon: '📋' },
+  { id: 'blogs', label: 'Blog Management', icon: '✍️' },
+  { id: 'newsroom', label: 'Newsroom', icon: '🗞️' },
   { id: 'talents', label: 'Talent Management', icon: '👥' },
   { id: 'users', label: 'User Management', icon: '🔑' },
   { id: 'analytics', label: 'Analytics', icon: '📊' },
@@ -25,6 +29,10 @@ export default function AdminDashboard() {
         return <TalentManagement />;
       case 'users':
         return <UserManagement />;
+      case 'blogs':
+        return <BlogManagement />;
+      case 'newsroom':
+        return <NewsroomManagement />;
       case 'analytics':
         return <Analytics />;
       case 'settings':
