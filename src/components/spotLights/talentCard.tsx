@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import emailjs from '@emailjs/browser';
 import Image from "next/image";
-import Head from "next/head";
 import Button from "../common/Button";
 
 type ProfileProps = {
@@ -141,12 +140,7 @@ function ProfileCard({
 
   return (
     <>
-      <Head>
-        <meta 
-          name="description" 
-          content={`View ${name}'s professional profile. ${role} with ${experience} of experience in ${location}. Hire or contact this professional via HireRight.`}
-        />
-      </Head>
+      {/* meta tags are set at the page level; removed Head from client component */}
       <div className="w-full rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-[1.02] font-manrope card-elevate">
         <div className="relative h-[240px] w-full glass-panel texture-diagonal overflow-hidden">
           <Image

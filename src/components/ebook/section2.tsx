@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Button from "../common/Button";
+
+// direct OneDrive PDF URL
+const oneDrivePdfUrl =
+  "https://onedrive.live.com/?id=%2Fpersonal%2F2631b21635246f55%2FDocuments%2FHire%20Right%20E%2DBook%2Epdf&parent=%2Fpersonal%2F2631b21635246f55%2FDocuments";
 // Calendar removed — dates hidden in listing
 const ebooks = [
   {
@@ -10,7 +14,7 @@ const ebooks = [
     image: "/img/blog/b11.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/talents-remote-jobs",
-    downloadLink: "/ebooks/ebook-1.pdf",
+    downloadLink: "/ebooks/download",
     readTime: "5mins",
   },
   {
@@ -21,18 +25,18 @@ const ebooks = [
     image: "/img/blog/b14.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/hiring-managers-tech-talent",
-    downloadLink: "/ebooks/ebook-2.pdf",
+    downloadLink: "/ebooks/download",
     readTime: "5mins",
   },
   {
     title: "RED FLAG #3",
     subtitle: "Smart Answers Without Substance: Spotting The Bluff.",
     description:
-      "This is one of the trickest red flags to spot.Many candidates impress interviewers with there polished communication skills and confidence,Even when they lack required expertise for the job.",
+      "This is one of the trickiest red flags to spot.Many candidates impress interviewers with there polished communication skills and confidence,Even when they lack required expertise for the job.",
     image: "/img/blog/b12.svg",
     buttonText: "Read more...",
     buttonLink: "/ebooks/hiring-managers-future-ready",
-    downloadLink: "/ebooks/ebook-3.pdf",
+    downloadLink: "/ebooks/download",
     readTime: "5mins",
   },
 ];
@@ -103,9 +107,24 @@ export  function EbookCard({
               {buttonText}
             </a>
             {downloadLink && (
-              <a href={downloadLink} download className="bg-primary-orange text-white px-3 py-1 rounded-md text-sm hover:opacity-90">
-                Download
-              </a>
+              <>
+                <a
+                  href={downloadLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary-orange text-white px-3 py-1 rounded-md text-sm hover:opacity-90"
+                >
+                  Download
+                </a>
+                <a
+                  href={oneDrivePdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-2 border border-primary-orange text-primary-orange px-3 py-1 rounded-md text-sm hover:bg-primary-orange/10"
+                >
+                  Direct download
+                </a>
+              </>
             )}
           </div>
           {/* date removed from ebook listing per request */}

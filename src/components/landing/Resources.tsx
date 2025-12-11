@@ -27,8 +27,8 @@ const resources = [
     details: 'Avoid costly hiring mistakes and build your dream team with ease!',
     date: 'February 7, 2025',
     buttonText: 'Download ebook (PDF)',
-    // PDF should be placed in public/pdfs/top-3-red-flags.pdf
-    buttonLink: '/pdfs/top-3-red-flags.pdf',
+    // route updated to internal ebook download page
+    buttonLink: '/ebooks/download',
   },
 ];
 
