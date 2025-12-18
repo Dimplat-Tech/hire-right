@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import JobManagement from '@/components/admin/sections/JobManagement';
 import TalentManagement from '@/components/admin/sections/TalentManagement';
+import TalentSpotlightManagement from '@/components/admin/sections/TalentSpotlightManagement';
 import UserManagement from '@/components/admin/sections/UserManagement';
 import Analytics from '@/components/admin/sections/Analytics';
 import Settings from '@/components/admin/sections/Settings';
@@ -13,6 +14,7 @@ const navItems = [
   { id: 'blogs', label: 'Blog Management', icon: '✍️' },
   { id: 'newsroom', label: 'Newsroom', icon: '🗞️' },
   { id: 'talents', label: 'Talent Management', icon: '👥' },
+  { id: 'talent-spotlight', label: 'Talent Spotlight', icon: '🌟' },
   { id: 'users', label: 'User Management', icon: '🔑' },
   { id: 'analytics', label: 'Analytics', icon: '📊' },
   { id: 'settings', label: 'Settings', icon: '⚙️' },
@@ -27,8 +29,8 @@ export default function AdminDashboard() {
       case 'jobs':
         return <JobManagement />;
       case 'talents':
-        return <TalentManagement />;
-      case 'users':
+        return <TalentManagement />;      case 'talent-spotlight':
+        return <TalentSpotlightManagement />;      case 'users':
         return <UserManagement />;
       case 'blogs':
         return <BlogManagement />;
