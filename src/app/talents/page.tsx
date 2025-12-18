@@ -10,8 +10,7 @@ function Page(){
         titleFirst="Talent"
         titleSecond="Spotlights"
         gradientOn='first'
-        subtitle="Explore and connect with the amazing talents we have under us and find which best fits the persona 
-                   you want for your job vacacies."
+        subtitle="Discover exceptional professionals within our network. Talent Spotlight helps you explore verified talents, understand their strengths, and identify the perfect fit for your role and company culture."
         buttonText="Return to home"
         buttonLink="/services"
       />
