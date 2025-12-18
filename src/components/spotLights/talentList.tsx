@@ -5,8 +5,17 @@ import Button from "../common/Button";
 import React, { useRef, useEffect, useState } from "react";
 
 const profiles = [
-  {name: "Sam Smith", photo: "/img/spotlight/image 27.svg", gender: "Male", location: "Lagos, Nigeria", role: "Business Development Manager", experience: "10 Years"},
-  {name: "Laurel", photo: "/img/spotlight/image 24.svg", gender: "Female", location: "Lagos, Nigeria", role: "Operations Manager", experience: "6 Years", summary: "I'm a business-driven operations manager with over six years' experience building smart, structured systems."}
+  {
+    name: "Laurel",
+    photo: "/img/spotlight/image 24.svg",
+    gender: "female",
+    location: "Lagos",
+    jobMode: "Remote / hybrid / onsite",
+    role: "Operations Manager",
+    experience: "6 Years",
+    summary:
+      "I'm a business-driven operations manager with over six years of experience in operations, executive support, and customer service. I specialize in optimizing workflows, improving team efficiency, and turning strategies into measurable results. I'm passionate about leading people, solving problems, and helping organizations grow through smart, structured systems."
+  }
 ];
 
 function TalentList() {
@@ -90,6 +99,8 @@ function TalentList() {
               location={profile.location}
               role={profile.role}
               experience={profile.experience}
+              jobMode={profile.jobMode}
+              summary={profile.summary}
             />
           </div>
         ))}

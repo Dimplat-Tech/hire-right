@@ -9,8 +9,10 @@ type ProfileProps = {
   name: string;
   gender: string;
   location: string;
-  role: string;
-  experience: string;
+  role?: string;
+  experience?: string;
+  jobMode?: string;
+  summary?: string;
   ImgUrl: string;
 };
 
@@ -20,6 +22,8 @@ function ProfileCard({
   location,
   role,
   experience,
+  jobMode,
+  summary,
   ImgUrl
 }: ProfileProps) {
   const [showDialog, setShowDialog] = useState(false);
@@ -174,7 +178,18 @@ function ProfileCard({
               <p className="text-sm font-medium text-[#1746A2] uppercase">Experience</p>
               <p className="text-base text-gray-900">{experience}</p>
             </div>
+            <div className="space-y-1">
+              <p className="text-sm font-medium text-[#1746A2] uppercase">Job mode</p>
+              <p className="text-base text-gray-900">{jobMode}</p>
+            </div>
           </div>
+
+          {summary && (
+            <div className="pt-4">
+              <p className="text-sm font-medium text-[#1746A2] uppercase">Summary</p>
+              <p className="text-base text-gray-900 mt-2">{summary}</p>
+            </div>
+          )}
 
           <div className="pt-4">
               <Button
