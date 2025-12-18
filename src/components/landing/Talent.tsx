@@ -4,10 +4,7 @@ import Button from '../common/Button';
 
 const talents = [
 	{ name: 'Sam Smith', role: 'Product designer', img: '/img/landing/image 27.svg' },
-	{ name: 'Grace Favour', role: 'Software developer', img: '/img/landing/image 24.svg' },
-	{ name: 'Daniel James', role: 'Project manager', img: '/img/landing/image 26.svg' },
-	{ name: 'Peace Bright', role: 'HR manager', img: '/img/landing/image 25.svg' },
-	// { name: 'Sam Smith', role: 'Product designer', img: '/img/landing/hr1.jpg' },
+	{ name: 'Laurel', role: 'Operations Manager', img: '/img/landing/image 24.svg' },
 ];
 
 const Talent: React.FC = () => {
