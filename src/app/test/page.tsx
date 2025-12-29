@@ -1,7 +1,7 @@
 // components/WhatWeDo.tsx
 import Image from "next/image";
 
-export default function WhatWeDo() {
+export default function WhatWeDo(): React.ReactNode {
   return (
     <section className="bg-white py-16 px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between gap-12">
       {/* Left Side - Images */}

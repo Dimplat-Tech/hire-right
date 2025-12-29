@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Why are you hiring for this role? The one question that reveals the real need behind every open role.',
 };
 
-export default function BeforeYouHirePage() {
+export default function BeforeYouHirePage(): React.ReactNode {
   return (
     <main className="max-w-4xl mx-auto px-4 py-16">
       <article className="prose prose-lg mx-auto">

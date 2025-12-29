@@ -2,7 +2,7 @@ import React from "react";
 import HeroSection from '@/components/common/HeroSection'
 import CardList from "@/components/newsroom/card-list";
 
-function Page (){
+export default function NewsroomPage(): React.ReactNode {
   return(
  <div  className="overflow-x-hidden max-w-[1280px] mx-auto">
       <HeroSection
@@ -21,5 +21,3 @@ function Page (){
     </div>
   )
 }
-
-export default Page;

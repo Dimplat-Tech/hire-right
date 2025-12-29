@@ -1,7 +1,7 @@
 import React from 'react'
 import Herosection from '@/components/about-us/Herosection'
 
-function page() {
+export default function JoinTalentPage(): React.ReactNode {
   return (
     <div>
       <Herosection />
@@ -9,5 +9,3 @@ function page() {
     </div>
   )
 }
-
-export default page

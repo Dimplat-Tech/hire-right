@@ -1,7 +1,7 @@
 import TalentList from "@/components/spotLights/talentList"
 import HeroSection from "@/components/common/HeroSection";
 
-function Page(){
+export default function TalentsPage(): React.ReactNode {
     return(
         <div className="overflow-x-hidden  m-w-[1440]">
 
@@ -21,4 +21,3 @@ function Page(){
         </div>
     )
 }
- export default Page;

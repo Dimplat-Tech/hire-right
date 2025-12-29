@@ -26,7 +26,7 @@ import Search from "../../components/jobopening/Search";
 import Returnbutton from "../../components/jobopening/Returnbutton";
 import { jobs as allJobs } from "../../data/jobs";
 
-export default function JobsPage() {
+export default function JobsPage(): React.ReactNode {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("");
 

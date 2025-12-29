@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AdminLogin from '@/components/admin/AdminLogin';
 import AdminDashboard from '@/components/admin/AdminDashboard';
 
-export default function AdminPage() {
+export default function AdminPage(): React.ReactNode {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = (credentials: { email: string; password: string }) => {

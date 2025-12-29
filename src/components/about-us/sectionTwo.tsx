@@ -108,4 +108,4 @@ const SectionTwo = () => {
   );
 };
 
-export default SectionTwo;
+export default SectionTwo;

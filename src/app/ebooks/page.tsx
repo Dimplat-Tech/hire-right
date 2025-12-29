@@ -2,7 +2,7 @@ import React from 'react'
 import HeroSection from '@/components/common/HeroSection'
 import Section2 from '@/components/ebook/section2'
 
-function page() {
+export default function EbooksPage(): React.ReactNode {
   return (
     <div>
       <HeroSection
@@ -18,5 +18,3 @@ function page() {
     </div>
   )
 }
-
-export default page

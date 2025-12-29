@@ -2,7 +2,7 @@ import { blogPosts } from "@/data/blog";
 
 // Next.js may provide `params` as a Promise in some versions/build modes.
 // Make the page async and await `params` to support both Promise and plain object.
-export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }): Promise<React.ReactNode> {
   const resolvedParams = (await params) as { slug: string };
   const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
 

@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat, Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-});
+// Use Google Fonts via stylesheet link to avoid turbopack internal font import errors
+// Fonts: Montserrat, Manrope, Space Grotesk
 
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "HireRight - Find the Right Talent",
@@ -33,12 +17,18 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): React.ReactNode {
   return (
-    <html lang="en" className={manrope.variable}>
-      <body
-        className={`${montserrat.variable} ${spaceGrotesk.variable} antialiased`}
-      >
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased">
         <Header />
         <main>{children}</main>
         <Footer />

@@ -6,7 +6,7 @@ export const metadata = {
   description: 'An exploration of the recurring claim that Nigerian youths are lazy and what employers and educators can do about it.',
 };
 
-export default function LazyYouthsPage() {
+export default function LazyYouthsPage(): React.ReactNode {
   return (
     <main className="max-w-4xl mx-auto px-4 py-16">
       <article className="prose prose-lg mx-auto">

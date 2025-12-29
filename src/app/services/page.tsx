@@ -5,7 +5,7 @@ import Recruitment from "../../components/services/Recruitment";
 import PeopleManagement from "../../components/services/PeopleManagement";
 import ContactBanner from "../../components/services/ContactBanner";
 
-export default function ServicesPage() {
+export default function ServicesPage(): React.ReactNode {
   return (
     <main className="pb-22 max-w-[1440px] mx-auto">
       <Hero />

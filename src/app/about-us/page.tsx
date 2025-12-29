@@ -5,7 +5,7 @@ import SectionFour from "@/components/about-us/sectionFour";
 import HeroSection from "@/components/common/HeroSection";
 
 
-function Page(){
+function Page(): React.ReactNode{
   return(
   <div className="overflow-x-hidden  m-w-[1440]">
   <HeroSection

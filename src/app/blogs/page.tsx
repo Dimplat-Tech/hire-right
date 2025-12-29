@@ -2,7 +2,7 @@ import React from "react";
 import HeroSection from "@/components/common/HeroSection";
 import Section2 from "@/components/blog/Section2";
 
-function page() {
+export default function BlogsPage(): React.ReactNode {
   return (
     <div>
       <HeroSection
@@ -19,5 +19,3 @@ make smarter hiring decisions, attract the right candidates, and build teams tha
     </div>
   );
 }
-
-export default page;

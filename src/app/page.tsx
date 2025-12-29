@@ -9,7 +9,7 @@ import Satisfied from '@/components/landing/Satisfied';
 import Talent from '@/components/landing/Talent';
 import Section3 from '@/components/landing/WhatWeDo';
 import Testimonial from '@/components/landing/Testimonial';
-function HomePage() {
+export default function HomePage(): React.ReactNode {
   return (
     <div className='flex flex-col gap-[40px]'>
       <HeroSection />
@@ -35,5 +35,3 @@ function HomePage() {
     </div>
   );
 }
-
-export default HomePage;

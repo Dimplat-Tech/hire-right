@@ -3,7 +3,7 @@ import HeroSection from '@/components/common/HeroSection'
 import TalentForm from '@/components/talentSubmission/form'
 
 
-function  TalentFormPage (){
+export default function TalentFormPage(): React.ReactNode {
   return(
        <div className='overflow-x-hidden max-w-[1280px] mx-auto' >
 
@@ -21,5 +21,3 @@ function  TalentFormPage (){
     </div>
   )
 }
-
-export default TalentFormPage

@@ -8,7 +8,7 @@ export const metadata = {
 const googleDriveUrl =
   'https://drive.google.com/file/d/1mUiVVFzHTfiGWUYGFHyJMid4TeE8257A/view?usp=sharing';
 
-export default function EbookDownloadPage() {
+export default function EbookDownloadPage(): React.ReactNode {
   return (
     <main className="max-w-3xl mx-auto px-6 py-12">
       <h1 className="text-3xl font-bold mb-6">INTRODUCTION</h1>

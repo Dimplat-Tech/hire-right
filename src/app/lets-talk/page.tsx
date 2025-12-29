@@ -4,7 +4,7 @@ import LetsTalk from '@/components/lets-talk/section'
 import HeroSection from '@/components/common/HeroSection'
 
 
-function LetsTalkPage (){
+function LetsTalkPage (): React.ReactNode {
   return(
    <div className='overflow-x-hidden max-w-[1280px] mx-auto' >
   
