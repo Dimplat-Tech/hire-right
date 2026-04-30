@@ -28,8 +28,11 @@ export default function HomePage(): React.ReactNode {
       <Resources />
       <Newsletter />
 
-      {/* Privacy Policy button (home) */}
-      <div className="w-full flex justify-center my-8">
+      {/* Home app button and privacy policy */}
+      <div className="w-full flex flex-col items-center gap-4 my-8">
+        <Button href="https://hirerightapp.com/" variant="primary" target="_blank">
+          Open Hire Right Web App
+        </Button>
         <Button href="/privacy" variant="outline">Privacy Policy</Button>
       </div>
     </div>
